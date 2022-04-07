@@ -1,11 +1,11 @@
-let l = function trim() {
+let l = function() {
     console.log("functionup")
 }
-let m = function changetoLowerCase() {
-    console.log("functionup")
+let m = function() {
+    console.log("FUNCTIONUP".toLocaleLowerCase())
 }
-let n = function changeToUpperCase() {
-    console.log("FUNCTIONUP")
+let n = function() {
+    console.log("functionup".toLocaleUpperCase())
 }
 module.exports.park1 = l
 module.exports.park2 = m

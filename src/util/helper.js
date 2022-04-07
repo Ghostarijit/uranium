@@ -1,8 +1,12 @@
-let k = function printDate() {
+let k = function() {
     console.log("prints the current date 06/04/2022")
+    let currentdate = new Date()
+    console.log(currentdate.getDate())
 }
-let b = function printMonth() {
+let b = function() {
     console.log("prints the current month April")
+    let currentdate = new Date()
+    console.log(currentdate.getMonth() + 1)
 }
 let c = function getBatchInfo() {
     console.log(" batch Arijit, week2, Day3, the topic being taught today is Nodejs module system")

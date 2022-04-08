@@ -11,19 +11,60 @@ const router = express.Router();
 //   res.send('My first ever api!')
 //});
 
-router.get('/', function(req, res) {
-    console.log('------------------')
-    console.log(req)
-    console.log('------------------')
-    console.log('These are the request query parameters: ', req.query)
-    res.send('My first ever api!')
+router.get('/missnumber', function(req, res) {
+    //  console.log('------------------')
+    //  console.log(req)
+    //  console.log('------------------')
+    // console.log('These are the request query parameters: ', req.query)
+    // res.send('My first ever api!')
+    const numArr = [1, 2, 3, 4, 5, 7, 8, 9];
 
+    const missing = [];
 
-
-
-    // problem 1
+    for (let i in numArr) {
+        // get the size of the gap
+        let x = numArr[i] - numArr[i - 1];
+        // start filling in the gap with `1`
+        let diff = 1;
+        // while there's still a gap, push the correct numbers
+        // into `missing`, calculated by the number + diff
+        while (diff < x) {
+            missing.push(numArr[i - 1] + diff);
+            diff++;
+        }
+    }
+    res.send(missing)
+        // problem 1
 
 });
+
+router.get('/missnumber2', function(req, res) {
+    //  console.log('------------------')
+    //  console.log(req)
+    //  console.log('------------------')
+    // console.log('These are the request query parameters: ', req.query)
+    // res.send('My first ever api!')
+    const numArr = [33, 34, 35, 37, 38];
+
+    const missing = [];
+
+    for (let i in numArr) {
+        // get the size of the gap
+        let x = numArr[i] - numArr[i - 1];
+        // start filling in the gap with `1`
+        let diff = 1;
+        // while there's still a gap, push the correct numbers
+        // into `missing`, calculated by the number + diff
+        while (diff < x) {
+            missing.push(numArr[i - 1] + diff);
+            diff++;
+        }
+    }
+    res.send(missing)
+        // problem 1
+
+});
+
 router.get('/movies', function(req, res) {
     const arry = ["rand de basnasti", "the shining", "lord of the rings", "bartman begins"]
     res.send(arry);

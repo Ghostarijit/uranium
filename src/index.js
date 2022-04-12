@@ -8,15 +8,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb+srv://functionup-cohort:G0Loxqc9wFEGyEeJ@cluster0.rzotr.mongodb.net/Pritesh87698-DB?retryWrites=true&w=majority", {
-    useNewUrlParser: true
-})
-.then( () => console.log("MongoDb is connected"))
-.catch ( err => console.log(err) )
+mongoose.connect("mongodb+srv://simaarijit:QQMOWD6M4fAkERYh@cluster0.u6fy9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
+        useNewUrlParser: true
+    })
+    .then(() => console.log("MongoDb is connected"))
+    .catch(err => console.log(err))
 
 app.use('/', route);
 
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 3000, function() {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });

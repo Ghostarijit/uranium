@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const authorSchema = new mongoose.Schema({
     // bookName: String,
@@ -21,13 +22,26 @@ const authorSchema = new mongoose.Schema({
     //summary: mongoose.Schema.Types.Mixed,
     // isDeleted: Boolean //true on book deletion i.e you flag the document/data as isDeleted: true..(mark "dirty")
     name: String,
-    author_id: {
-        type: Number,
-        required: true
+    author: {
+        type: ObjectId,
+        ref: "Author1"
+
+        // tupe: Number,
+        // required: true
+    },
+    publisher: {
+        type: ObjectId,
+        ref: "publisher1"
+            // tupe: Number,
+            // required: true
     },
     price: Number,
-    rating: Number
+    ratings: Number,
+    isHardCover: {
+        type: Boolean,
+        default: false
+    }
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('getbooks', authorSchema) //users
+module.exports = mongoose.model('book1', authorSchema) //users

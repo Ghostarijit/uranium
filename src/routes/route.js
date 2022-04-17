@@ -14,7 +14,6 @@ router.get("/test-me", function(req, res) {
 //router.get("/getUsersData", UserController.getUsersData)
 
 //router.post("/createBook", BookController.createBook  )
-
 //router.get("/getBooksData", BookController.getBooksData)
 
 //router.post("/updateBooks", BookController.updateBooks)
@@ -23,14 +22,20 @@ router.post("/createNewAuthor", allController.createNewAuthor)
 
 router.post("/createNewBook", allController.createNewBook)
 
+router.post("/createPublisher", allController.createPublisher)
+
 router.get("/allBooks", allController.allBooks)
+
+//router.get("/allBooks", allController.allBooks)
 
 router.get("/updateBookPrice", allController.updatedBookPrice)
 
-router.get("/authorName", allController.authorName)
-    //MOMENT JS
-    //const moment = require('moment');
-    //router.get("/dateManipulations", function (req, res) {
+router.put("/pubPenHar", allController.pubPenHar)
+
+//router.get("/authorName", allController.authorName)
+//MOMENT JS
+//const moment = require('moment');
+//router.get("/dateManipulations", function (req, res) {
 
 // const today = moment();
 // let x= today.add(10, "days")

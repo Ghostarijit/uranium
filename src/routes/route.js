@@ -18,19 +18,32 @@ router.get("/test-me", function(req, res) {
 
 //router.post("/updateBooks", BookController.updateBooks)
 //router.post("/deleteBooks", BookController.deleteBooks)
-router.post("/createNewAuthor", allController.createNewAuthor)
+//router.post("/createNewAuthor", allController.createNewAuthor)
 
-router.post("/createNewBook", allController.createNewBook)
+//router.post("/createNewBook", allController.createNewBook)
 
-router.post("/createPublisher", allController.createPublisher)
-
-router.get("/allBooks", allController.allBooks)
+//router.post("/createPublisher", allController.createPublisher)
 
 //router.get("/allBooks", allController.allBooks)
 
-router.get("/updateBookPrice", allController.updatedBookPrice)
+//router.get("/allBooks", allController.allBooks)
 
-router.put("/pubPenHar", allController.pubPenHar)
+//router.get("/updateBookPrice", allController.updatedBookPrice)
+
+//router.put("/pubPenHar", allController.pubPenHar)
+
+
+router.post("/createNewBatch", allController.createNewBatch)
+
+router.post("/createNewDocument", allController.createNewDocument)
+
+router.get("/scolership", allController.scolership)
+
+router.get("/devolopers", allController.devolopers)
+
+
+
+
 
 //router.get("/authorName", allController.authorName)
 //MOMENT JS

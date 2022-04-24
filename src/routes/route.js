@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require("../controllers/userController")
-const middleware = require("../middleware/auth")
+const middleware = require("../middleware/auth.js")
 
 
 router.get("/test-me", function(req, res) {
@@ -16,10 +16,11 @@ router.post("/login", userController.loginUser)
 router.get("/users/:userId", userController.getUserData)
 router.post("/users/:userId/posts", userController.postMessage)
 
-router.put("/users/:userId", middleware.authenticate, userController.updateUser)
-    //router.delete('/users/:userId', userController.deleteUser)
+router.put("/users/:userId", middleware.authorization, middleware.validateToken, userController.updateUser)
 
-router.put("/users/:userId/updatedAge", middleware.authenticate, userController.updatedAge)
+router.delete('/users/:userId', userController.deleteUser)
+
+
 
 
 module.exports = router;

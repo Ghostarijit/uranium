@@ -41,11 +41,11 @@ const loginUser = async function(req, res) {
 };
 
 const getUserData = async function(req, res) {
-    let token = req.headers["x-Auth-token"];
-    if (!token) token = req.headers["x-auth-token"];
+    //  let token = req.headers["x-Auth-token"];
+    // if (!token) token = req.headers["x-auth-token"];
 
     //If no token is present in the request header return error
-    if (!token) return res.send({ status: false, msg: "token must be present" });
+    //  if (!token) return res.send({ status: false, msg: "token must be present" });
 
     console.log(token);
 
@@ -54,9 +54,9 @@ const getUserData = async function(req, res) {
     // Input 1 is the token to be decoded
     // Input 2 is the same secret with which the token was generated
     // Check the value of the decoded token yourself
-    let decodedToken = jwt.verify(token, "functionup-thorium");
-    if (!decodedToken)
-        return res.send({ status: false, msg: "token is invalid" });
+    // let decodedToken = jwt.verify(token, "functionup-thorium");
+    // if (!decodedToken)
+    //   return res.send({ status: false, msg: "token is invalid" });
 
     let userId = req.params.userId;
     let userDetails = await userModel.findById(userId);
@@ -71,6 +71,23 @@ const updateUser = async function(req, res) {
     // Check if the token is present
     // Check if the token present is a valid token
     // Return a different error message in both these cases
+    //  let token = req.headers["x-Auth-token"];
+    //  if (!token) token = req.headers["x-auth-token"];
+
+    // If no token is present in the request header return error
+    //  if (!token) return res.send({ status: false, msg: "token must be present" });
+
+    //  console.log(token);
+
+    // If a token is present then decode the token with verify function
+    // verify takes two inputs:
+    // Input 1 is the token to be decoded
+    // Input 2 is the same secret with which the token was generated
+    // Check the value of the decoded token yourself
+    // let decodedToken = jwt.verify(token, "functionup-thorium");
+    // if (!decodedToken)
+    //    return res.send({ status: false, msg: "token is invalid" });
+
 
     let userId = req.params.userId;
     let user = await userModel.findById(userId);
@@ -80,8 +97,8 @@ const updateUser = async function(req, res) {
     }
 
     let userData = req.body;
-    let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-    res.send({ status: updatedUser, data: updatedUser });
+    let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData, { new: true });
+    res.send({ status: true, data: updatedUser });
 };
 
 const postMessage = async function(req, res) {
@@ -110,24 +127,34 @@ const postMessage = async function(req, res) {
         //add the message to user's posts
     updatedPosts.push(message)
     let updatedUser = await userModel.findOneAndUpdate({ _id: user._id }, { posts: updatedPosts }, { new: true })
-
-    //return the updated user document
+    res.send({ status: true, deta: updatedUser })
+        //return the updated user document
 
 }
 
-let updatedAge = async function(req, res) {
 
-    let userId = req.params.userId
 
-    user = await userModel.findById(userId)
+let deleteUser = async function(req, res) {
+    //   let token = req.headers["x-Auth-token"] || req.headers["x-auth-token"]
+    //  if (!token) {
+    //     return res.send({ msg: "Please inout a valied token" })
 
-    if (!user) return res.send({ msg: " Please enter a valied userId" })
+    // }
+    let userId = req.params.userId;
+    let user = await userModel.findById(userId);
 
-    UserData = req.body
+    if (!user) { return res.send({ msg: " NO such user " }) }
 
-    updaeduderr = await userModel.findOneAndUpdate({ _id: userId }, { set: { age: UserData.age } }, { new: true })
-    res.send(updaeduderr)
 
+
+
+    let userData = req.params.userId
+
+    let updatedUser = await userModel.findOneAndUpdate({ _id: userData }, { $set: { isDeleted: true } }, { new: true }
+
+
+    )
+    res.send(({ status: true, data: updatedUser }))
 
 }
 
@@ -137,4 +164,4 @@ module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
 module.exports.postMessage = postMessage
 
-module.exports.updatedAge = updatedAge
+module.exports.deleteUser = deleteUser

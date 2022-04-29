@@ -205,14 +205,25 @@ const deletByProperty = async(req, res) => {
         let exist = await blogModel.find(data)
         console.log(exist)
 
-        if (exist.length === 0) return res.status(404).send({ msg: "blog is not present in db" })
+        // if (exist.length === 0) return res.status(404).send({ msg: "blog is not present in db" })
+        for (i = 0; i < exist.length; i++) {
+            if (exist[i].isDeleted == true) return res.status(404).send({ msg: "Already dealeted" })
+        }
 
-        let x = exist.filter(y => y.isDeleted == false)
+        //console.log(prop)
 
-        console.log("in x not deleted", x)
+        //if (prop) return res.status(404).send({ msg: "Already dealeted" })
+
+        // let x = exist.isDeleted
+        // console.log("in x not deleted", x)
+        // if (x !== false) {
+        //    return res.status(400).send({ status: true, msg: "Already deleted" })
+        // }
 
 
-        if (x.length === 0) return res.send("already deleted")
+
+
+        //if (x.length === 0) return res.send("already deleted")
 
         let property = await blogModel.updateMany(data, { $set: { isDeleted: true, deleteAt: Date.now() } }, { new: true })
 
@@ -252,6 +263,7 @@ const loginUser = async function(req, res) {
 module.exports.createAuthor = createAuthor
 
 module.exports.createBlogs = createBlogs
+
 module.exports.getBlogs = getBlogs
 module.exports.updateblogs = updateblogs
 module.exports.deletById = deletById

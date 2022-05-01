@@ -1,31 +1,21 @@
-
 const jwt = require("jsonwebtoken");
-
 const mongoose = require("mongoose")
-
-
-
 const validateToken = async function (req, res, next) {
     try {
-        let token = req.headers['x-Api-Key'] || req.headers['x-api-key']
-        if (!token) {
-           return res.status(404).send({ status: false, msg: "token must be present" });
-        }
+        let id = req.query.id
+        console.log(id)
 
-        let decodedToken = jwt.verify(token, "project-1-group-12")
-         console.log(decodedToken)
-
-        if (!decodedToken) {
-            return res.status(401).send({ status: false, msg: "token is invalid" });
-
-        }
-        req["authorId"]= decodedToken.authorId
-        console.log(req["authorId"])
-        
-        next();
-    } catch (err) {
-        return res.status(500).send({  status:"Error", error: err.message })
-
+        if (id === undefined) return (res.status(404).send('please provide authorId'))
+        if (!mongoose.isValidObjectId(id)) return (res.status(400).send("Object Id is invalid"))
+        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send({ Msg: 'no sucn user existsin db' })
+        let token = req.headers['tokens']
+        if (!token) return res.status(400).send("msg:token must be present ")
+        let validation = jwt.verify(token, "project-1-group-12")
+        if (validation.userId == id) return res.status(400).send('you are not authoried to change the document')
+        next()
+    }
+    catch (err) {
+        res.status(500).send(err)
     }
 }
 module.exports.validateToken = validateToken
